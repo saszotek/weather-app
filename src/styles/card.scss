@@ -1,0 +1,93 @@
+@use 'variables';
+
+.card-container {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    width: 400px;
+    height: 600px;
+    color: variables.$text-color-light;
+    border-radius: 25px;
+    overflow: hidden;
+
+    .card-container__image-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        filter: brightness(70%);
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+        }
+    }
+
+    .card-container__weather-details {
+        padding: 25px 30px;
+
+        h1 {
+            font-size: 45px;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            letter-spacing: variables.$letter-spacing-third;
+            font-weight: 400;
+            font-size: 30px;
+
+            span {
+                margin-right: 7px;
+            }
+        }
+    }
+
+    .card-container__location-details {
+        align-self: flex-end;
+        padding: 30px 25px;
+        letter-spacing: variables.$letter-spacing-third;
+
+        h3 {
+            span {
+                margin-right: 7px;
+            }
+
+            &:nth-child(1) {
+                font-size: 30px;
+            }
+
+            &:nth-child(2) {
+                padding: 7px 0 5px 0;
+                font-size: 16px;
+            }
+
+            &:nth-child(3) {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .card-container__button {
+        position: absolute;
+        top: 35px;
+        right: 35px;
+
+        button {
+            color: #fff;
+            font-size: 45px;
+            background-color: transparent;
+            border: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

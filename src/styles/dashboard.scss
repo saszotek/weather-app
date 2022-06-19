@@ -1,0 +1,22 @@
+@use 'variables';
+
+body {
+    background-color: variables.$color-primary;
+}
+
+.dashboard-container {
+    .header {
+        max-width: 1000px;
+        margin: 50px auto 150px auto;
+    }
+
+    .card-list {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        gap: 50px;
+        max-width: 1500px;
+        margin: 0 auto;
+        padding-bottom: 50px;
+    }
+}

@@ -1,0 +1,59 @@
+@use 'variables';
+
+.header-container {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: variables.$color-secondary;
+    border-radius: 25px;
+
+    // .header-container__menu {
+    //     position: absolute;
+    //     bottom: 0px;
+    //     left: 15px;
+    //     font-size: 40px;
+    //     color: #fff;
+
+    //     &:hover {
+    //         cursor: pointer;
+    //     }
+    // }
+
+    .header-container__title {
+        h1 {
+            padding: 100px 0 30px 0;
+            color: variables.$text-color-light;
+            font-size: 40px;
+            letter-spacing: variables.$letter-spacing-primary;
+            font-weight: 400;
+
+            span {
+                font-weight: 900;
+                font-style: italic;
+            }
+        }
+    }
+
+    .header-container__search-box {
+        padding: 30px 0 100px 0;
+
+        input {
+            width: 300px;
+            height: 40px;
+            padding: 10px 15px;
+            font-size: 18px;
+            letter-spacing: variables.$letter-spacing-third;
+            border: 1px solid variables.$color-secondary;
+            border-radius: 25px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

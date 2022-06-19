@@ -1,0 +1,19 @@
+@use 'variables';
+
+.card-details-container__forecast-box__details {
+    padding: 15px 30px;
+    text-align: center;
+
+    div {
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 18px;
+        letter-spacing: variables.$letter-spacing-third;
+
+        &:nth-child(2) {
+            margin: 5px 0;
+        }
+    }
+}
