@@ -3,12 +3,18 @@ import "../../styles/header.scss";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-function Header() {
+function Header({ setInput, getForecastData }) {
   const inputReference = useRef(null);
 
   useEffect(() => {
     inputReference.current.focus();
   }, []);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      getForecastData();
+    }
+  };
 
   return (
     <div className="header-container">
@@ -25,6 +31,10 @@ function Header() {
           type="text"
           placeholder="Search for a location"
           ref={inputReference}
+          onChange={(event) => {
+            setInput(event.target.value);
+          }}
+          onKeyDown={handleKeyDown}
         />
       </div>
     </div>
