@@ -1,4 +1,4 @@
-// API key restricted
+// API key is restricted
 // https://www.weatherapi.com/
 import { apiKey } from "./key";
 
