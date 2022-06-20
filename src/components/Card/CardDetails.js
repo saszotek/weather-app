@@ -19,7 +19,6 @@ function CardDetails({
   handleClick,
   weatherForecast,
   weatherDataByHour,
-  whatHour,
 }) {
   // eslint-disable-next-line
   const [numberOfComponents, setNumberOfComponents] = useState(3);
@@ -141,7 +140,6 @@ function CardDetails({
         {[...Array(numberOfComponents)].map((e, i) => (
           <CardDetailsForecast
             key={i}
-            whatHour={whatHour}
             weatherDataByHour={weatherDataByHour}
             iteration={i + 1}
           />

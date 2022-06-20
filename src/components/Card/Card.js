@@ -18,6 +18,7 @@ import CardDetails from "./CardDetails";
 import RainBG from "../../assets/images/rain-bg.jpg";
 
 export const IconContext = createContext();
+export const HourContext = createContext();
 
 function Card({ forecastData, whichDay }) {
   const [animateCard, setAnimateCard] = useState(false);
@@ -180,19 +181,20 @@ function Card({ forecastData, whichDay }) {
           <FontAwesomeIcon icon={faAngleDown} />
         </button>
       </div>
-      <IconContext.Provider value={whatIcon}>
-        <CardDetails
-          animationClass={
-            animateCard
-              ? "card-details-container__animation-start"
-              : "card-details-container__animation-end"
-          }
-          handleClick={handleClick}
-          weatherForecast={weatherForecast}
-          weatherDataByHour={weatherDataByHour}
-          whatHour={whatHour}
-        />
-      </IconContext.Provider>
+      <HourContext.Provider value={whatHour}>
+        <IconContext.Provider value={whatIcon}>
+          <CardDetails
+            animationClass={
+              animateCard
+                ? "card-details-container__animation-start"
+                : "card-details-container__animation-end"
+            }
+            handleClick={handleClick}
+            weatherForecast={weatherForecast}
+            weatherDataByHour={weatherDataByHour}
+          />
+        </IconContext.Provider>
+      </HourContext.Provider>
     </div>
   );
 }
