@@ -66,13 +66,16 @@
         }
     }
 
-    .card-details-container__forecast-box {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        align-items: center;
+    .card-details-container__carousel {
+        max-width: 360px;
+        cursor: grab;
+        overflow: hidden;
         background-color: variables.$color-primary;
         border-radius: 25px;
+
+        .card-details-container__carousel__inner-carousel {
+            display: flex;
+        }
     }
 }
 

@@ -42,7 +42,7 @@ function Dashboard() {
         <motion.div
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
-          className="dashboard-container__inner-carousel"
+          className="dashboard-container__carousel__inner-carousel"
         >
           {[...Array(3)].map((e, i) => (
             <Card key={i} forecastData={forecastData} whichDay={i} />

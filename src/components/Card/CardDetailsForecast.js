@@ -16,7 +16,7 @@ function CardDetailsForecast({ weatherDataByHour, iteration }) {
   };
 
   return (
-    <div className="card-details-container__forecast-box__details">
+    <div className="card-details-container__carousel__inner-carousel_details">
       <div>
         <FontAwesomeIcon icon={whatIcon(weatherDataByHour())} />
       </div>

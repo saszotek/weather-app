@@ -1,7 +1,8 @@
 @use 'variables';
 
-.card-details-container__forecast-box__details {
-    padding: 15px 30px;
+.card-details-container__carousel__inner-carousel_details {
+    min-width: 120px;
+    padding: 15px 0;
     text-align: center;
 
     div {

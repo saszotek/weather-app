@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../../styles/carddetails.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,6 +13,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import CardDetailsForecast from "./CardDetailsForecast";
+import { motion } from "framer-motion";
 
 function CardDetails({
   animationClass,
@@ -21,7 +22,14 @@ function CardDetails({
   weatherDataByHour,
 }) {
   // eslint-disable-next-line
-  const [numberOfComponents, setNumberOfComponents] = useState(3);
+  const [numberOfComponents, setNumberOfComponents] = useState(12);
+  const [width, setWidth] = useState(0);
+
+  const carousel = useRef();
+
+  useEffect(() => {
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+  }, []);
 
   const convertTime = (timeStr) => {
     const [time, modifier] = timeStr.split(" ");
@@ -135,15 +143,25 @@ function CardDetails({
           <p>{weatherForecast?.day?.uv}</p>
         </div>
       </div>
-      <div className="card-details-container__forecast-box">
-        {[...Array(numberOfComponents)].map((e, i) => (
-          <CardDetailsForecast
-            key={i}
-            weatherDataByHour={weatherDataByHour}
-            iteration={i + 1}
-          />
-        ))}
-      </div>
+      <motion.div
+        ref={carousel}
+        whileTap={{ cursor: "grabbing" }}
+        className="card-details-container__carousel"
+      >
+        <motion.div
+          drag="x"
+          dragConstraints={{ right: 0, left: -width }}
+          className="card-details-container__carousel__inner-carousel"
+        >
+          {[...Array(numberOfComponents)].map((e, i) => (
+            <CardDetailsForecast
+              key={i}
+              weatherDataByHour={weatherDataByHour}
+              iteration={i + 1}
+            />
+          ))}
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
