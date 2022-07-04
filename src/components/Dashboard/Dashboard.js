@@ -4,7 +4,7 @@ import "../../styles/dashboard.scss";
 import Card from "../Card/Card";
 import Header from "../Header/Header";
 import { serverURL } from "../../api/main";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 function Dashboard() {
   const [forecastData, setForecastData] = useState([]);
@@ -15,7 +15,7 @@ function Dashboard() {
 
   useEffect(() => {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
-  }, [])
+  }, []);
 
   // Requesting weather's data
   const getForecastData = () => {
@@ -34,15 +34,19 @@ function Dashboard() {
       <div className="header">
         <Header setInput={setInput} getForecastData={getForecastData} />
       </div>
-      <motion.div ref={carousel} whileTap={{cursor: "grabbing"}} className="carousel">
-        <motion.div drag="x" dragConstraints={{right: 0, left: -width}} className="inner-carousel">
+      <motion.div
+        ref={carousel}
+        whileTap={{ cursor: "grabbing" }}
+        className="dashboard-container__carousel"
+      >
+        <motion.div
+          drag="x"
+          dragConstraints={{ right: 0, left: -width }}
+          className="dashboard-container__inner-carousel"
+        >
           {[...Array(3)].map((e, i) => (
-            <Card
-            key={i}
-            forecastData={forecastData}
-            whichDay={i}
-          />
-        ))}
+            <Card key={i} forecastData={forecastData} whichDay={i} />
+          ))}
         </motion.div>
       </motion.div>
     </div>

@@ -10,13 +10,13 @@ body {
         margin: 50px auto 150px auto;
     }
 
-    .carousel {
+    .dashboard-container__carousel {
         max-width: 1400px;
         margin: 0 auto;
         cursor: grab;
         overflow: hidden;
 
-        .inner-carousel {
+        .dashboard-container__inner-carousel {
             display: flex;
             gap: 50px;
             margin: 0 50px;
@@ -28,7 +28,7 @@ body {
 // Responsive styles
 @media (max-width: 1400px) {
     .dashboard-container {
-        .carousel {
+        .dashboard-container__carousel {
             max-width: 950px;
         }
     }
@@ -36,7 +36,7 @@ body {
 
 @media (max-width: 949px) {
     .dashboard-container {
-        .carousel {
+        .dashboard-container__carousel {
             max-width: 500px;
         }
     }
