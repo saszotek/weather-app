@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/header.scss";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 function Header({ setInput, getForecastData }) {
   const inputReference = useRef(null);
@@ -18,9 +16,6 @@ function Header({ setInput, getForecastData }) {
 
   return (
     <div className="header-container">
-      {/* <div className="header-container__menu">
-        <FontAwesomeIcon icon={faCaretDown} />
-      </div> */}
       <div className="header-container__title">
         <h1>
           Weather <span>Forecast</span>

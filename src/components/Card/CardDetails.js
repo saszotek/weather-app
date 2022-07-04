@@ -24,7 +24,6 @@ function CardDetails({
   const [numberOfComponents, setNumberOfComponents] = useState(3);
 
   const convertTime = (timeStr) => {
-    if (timeStr === undefined) console.log("HUJ DUPA CZUPER");
     const [time, modifier] = timeStr.split(" ");
     let [hours, minutes] = time.split(":");
     if (hours === "12") {
