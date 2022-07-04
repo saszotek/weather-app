@@ -21,8 +21,6 @@ function CardDetails({
   weatherForecast,
   weatherDataByHour,
 }) {
-  // eslint-disable-next-line
-  const [numberOfComponents, setNumberOfComponents] = useState(12);
   const [width, setWidth] = useState(0);
 
   const carousel = useRef();
@@ -153,7 +151,7 @@ function CardDetails({
           dragConstraints={{ right: 0, left: -width }}
           className="card-details-container__carousel__inner-carousel"
         >
-          {[...Array(numberOfComponents)].map((e, i) => (
+          {[...Array(12)].map((e, i) => (
             <CardDetailsForecast
               key={i}
               weatherDataByHour={weatherDataByHour}
