@@ -1,20 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../../styles/carddetails.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSun,
-  faMoon,
-  faCloudRain,
-  faSnowflake,
-  faWind,
-  faRadiation,
-  faGauge,
-  faWater,
-  faXmark,
-  faSkull,
-} from "@fortawesome/free-solid-svg-icons";
-import CardDetailsForecast from "./CardDetailsForecast";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../styles/carddetails.scss";
+import icons from "../../assets/icons/icons";
+import CardDetailsForecast from "./CardDetailsForecast";
 
 function CardDetails({
   animationClass,
@@ -88,7 +77,7 @@ function CardDetails({
       // This condition was created solely on API's restrictions for not having data for fourth day.
       if (thereIsNoDataForecast) {
         // Dummy data to display
-        arr.push(faSkull);
+        arr.push(icons.faSkull);
         arr.push("1934-03-12 Forecast");
         arr.push("No Data");
         return arr;
@@ -107,14 +96,14 @@ function CardDetails({
     <div className={`card-details-container ${animationClass} `}>
       <div className="card-details-container__button">
         <button onClick={() => handleClick()}>
-          <FontAwesomeIcon icon={faXmark} />
+          <FontAwesomeIcon icon={icons.faXmark} />
         </button>
       </div>
       <div className="card-details-container__box">
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faSun} />
+              <FontAwesomeIcon icon={icons.faSun} />
             </i>
             Sunrise
           </p>
@@ -125,7 +114,7 @@ function CardDetails({
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faMoon} />
+              <FontAwesomeIcon icon={icons.faMoon} />
             </i>
             Sunset
           </p>
@@ -136,7 +125,7 @@ function CardDetails({
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faCloudRain} />
+              <FontAwesomeIcon icon={icons.faCloudRain} />
             </i>
             Rain
           </p>
@@ -148,7 +137,7 @@ function CardDetails({
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faSnowflake} />
+              <FontAwesomeIcon icon={icons.faSnowflake} />
             </i>
             Snow
           </p>
@@ -160,7 +149,7 @@ function CardDetails({
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faWind} />
+              <FontAwesomeIcon icon={icons.faWind} />
             </i>
             Wind
           </p>
@@ -172,7 +161,7 @@ function CardDetails({
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faGauge} />
+              <FontAwesomeIcon icon={icons.faGauge} />
             </i>
             Air pressure
           </p>
@@ -184,7 +173,7 @@ function CardDetails({
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faWater} />
+              <FontAwesomeIcon icon={icons.faWater} />
             </i>
             Humidity
           </p>
@@ -196,7 +185,7 @@ function CardDetails({
         <div className="card-details-container__box__info">
           <p>
             <i>
-              <FontAwesomeIcon icon={faRadiation} />
+              <FontAwesomeIcon icon={icons.faRadiation} />
             </i>
             UV
           </p>

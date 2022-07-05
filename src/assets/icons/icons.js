@@ -1,0 +1,41 @@
+import {
+  faCalendar,
+  faLocationDot,
+  faAngleDown,
+  faSun,
+  faCloudSun,
+  faCloud,
+  faCloudRain,
+  faSnowflake,
+  faCloudBolt,
+  faSmog,
+  faSkull,
+  faMoon,
+  faWind,
+  faRadiation,
+  faGauge,
+  faWater,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+
+const icons = {
+  faCalendar: faCalendar,
+  faLocationDot: faLocationDot,
+  faAngleDown: faAngleDown,
+  faSun: faSun,
+  faCloudSun: faCloudSun,
+  faCloud: faCloud,
+  faCloudRain: faCloudRain,
+  faSnowflake: faSnowflake,
+  faCloudBolt: faCloudBolt,
+  faSmog: faSmog,
+  faSkull: faSkull,
+  faMoon: faMoon,
+  faWind: faWind,
+  faRadiation: faRadiation,
+  faGauge: faGauge,
+  faWater: faWater,
+  faXmark: faXmark,
+};
+
+export default icons;

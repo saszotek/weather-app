@@ -1,21 +1,9 @@
 import React, { useState } from "react";
-import "../../styles/card.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendar,
-  faLocationDot,
-  faAngleDown,
-  faSun,
-  faCloudSun,
-  faCloud,
-  faCloudRain,
-  faSnowflake,
-  faCloudBolt,
-  faSmog,
-  faSkull,
-} from "@fortawesome/free-solid-svg-icons";
-import CardDetails from "./CardDetails";
+import "../../styles/card.scss";
+import icons from "../../assets/icons/icons";
 import RainBG from "../../assets/images/rain-bg.jpg";
+import CardDetails from "./CardDetails";
 
 function Card({ forecastData, whichDay }) {
   const [animateCard, setAnimateCard] = useState(false);
@@ -89,20 +77,20 @@ function Card({ forecastData, whichDay }) {
 
     switch (weatherCode) {
       case 1000:
-        return faSun;
+        return icons.faSun;
       case 1003:
-        return faCloudSun;
+        return icons.faCloudSun;
       case 1006:
       case 1009:
-        return faCloud;
+        return icons.faCloud;
       case 1087:
       case 1273:
       case 1276:
-        return faCloudBolt;
+        return icons.faCloudBolt;
       case 1030:
       case 1135:
       case 1147:
-        return faSmog;
+        return icons.faSmog;
       case 1063:
       case 1150:
       case 1153:
@@ -118,7 +106,7 @@ function Card({ forecastData, whichDay }) {
       case 1240:
       case 1243:
       case 1246:
-        return faCloudRain;
+        return icons.faCloudRain;
       case 1066:
       case 1069:
       case 1072:
@@ -141,9 +129,9 @@ function Card({ forecastData, whichDay }) {
       case 1264:
       case 1279:
       case 1282:
-        return faSnowflake;
+        return icons.faSnowflake;
       default:
-        return faSkull;
+        return icons.faSkull;
     }
   };
 
@@ -162,13 +150,13 @@ function Card({ forecastData, whichDay }) {
         <h3>{weatherData && whatDayOfWeek()}</h3>
         <h3>
           <span>
-            <FontAwesomeIcon icon={faCalendar} />
+            <FontAwesomeIcon icon={icons.faCalendar} />
           </span>
           {weatherData && whatMonthAndDay()}
         </h3>
         <h3>
           <span>
-            <FontAwesomeIcon icon={faLocationDot} />
+            <FontAwesomeIcon icon={icons.faLocationDot} />
           </span>
           {weatherData && `${location?.name}, ${location?.country}`}
         </h3>
@@ -178,7 +166,7 @@ function Card({ forecastData, whichDay }) {
       </div>
       <div className="card-container__button">
         <button onClick={() => handleClick()}>
-          <FontAwesomeIcon icon={faAngleDown} />
+          <FontAwesomeIcon icon={icons.faAngleDown} />
         </button>
       </div>
       <CardDetails

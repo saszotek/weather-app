@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import "../../styles/dashboard.scss";
-import Card from "../Card/Card";
-import Header from "../Header/Header";
 import { serverURL } from "../../api/main";
 import { motion } from "framer-motion";
+import "../../styles/dashboard.scss";
+import Header from "../Header/Header";
+import Card from "../Card/Card";
 
 function Dashboard() {
   const [forecastData, setForecastData] = useState([]);

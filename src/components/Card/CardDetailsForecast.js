@@ -1,10 +1,10 @@
 import React from "react";
-import "../../styles/carddetailsforecast.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../styles/carddetailsforecast.scss";
 
 function CardDetailsForecast({ arrayData }) {
   // Data from API comes like this: 2022-07-05 13:37
-  // Extracting only time by splitting
+  // Extracting only local time by splitting
   const getExactTime = (text) => {
     if (text === undefined) {
       return null;
