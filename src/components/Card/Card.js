@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import "../../styles/card.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,42 +17,41 @@ import {
 import CardDetails from "./CardDetails";
 import RainBG from "../../assets/images/rain-bg.jpg";
 
-export const IconContext = createContext();
-export const HourContext = createContext();
-
 function Card({ forecastData, whichDay }) {
   const [animateCard, setAnimateCard] = useState(false);
 
-  let location = forecastData?.location;
-  let lastUpdatedEpoch = forecastData?.current?.last_updated_epoch;
-  let weatherForecast = forecastData?.forecast?.forecastday[whichDay];
+  const location = forecastData?.location;
+  const lastUpdatedEpoch = forecastData?.current?.last_updated_epoch;
+  const weatherData = forecastData?.forecast?.forecastday;
 
   const handleClick = () => {
     setAnimateCard(!animateCard);
   };
 
+  // "current" in naming function is relative to the weather's date of Card Component
   // Calculating a proper day to render weather's forecast from
-  // 86400 is equal to a whole day in epoch time (86400 seconds)
+  // 86400 is equal to a whole day in unix time (86400 seconds)
   const currentEpochTime = () => {
     let baseTime = lastUpdatedEpoch;
     let targetTime = baseTime + 86400 * whichDay;
+
+    // Rounding time to a nearest hour
+    targetTime = targetTime - (targetTime % 3600);
     return targetTime;
   };
 
-  // Calculating current hour of a downloaded weather's data
-  const whatHour = () => {
-    let date = new Date(currentEpochTime() * 1000);
-    let hours = date.getHours();
-    return hours;
-  };
-
-  // Returning JSON with weather's forecast data based on a hour
-  // correction corrects a hour when rendering later weather's data
-  const weatherDataByHour = (correction = 0) => {
-    if (correction > 0 && whatHour() >= 23) {
-      return weatherForecast?.hour[0 + correction];
+  // Returning current weather's data based on date and hour if necessary
+  const currentWeather = (dayNumber, time = currentEpochTime()) => {
+    if (weatherData === undefined) {
+      return null;
     }
-    return weatherForecast?.hour[whatHour() + correction];
+
+    let dataByHour = weatherData[dayNumber]?.hour;
+    for (let i = 0; i < dataByHour.length; i++) {
+      if (dataByHour[i].time_epoch === time) {
+        return dataByHour[i];
+      }
+    }
   };
 
   const whatDayOfWeek = () => {
@@ -83,9 +82,10 @@ function Card({ forecastData, whichDay }) {
     return `${month} ${day}${suffix}`;
   };
 
+  // Assigning a proper icon based on API's weather code
   // Not ideal solution, but it is what it is for now
-  const whatIcon = (weatherData) => {
-    let weatherCode = weatherData?.condition.code;
+  const whatIcon = (weather) => {
+    let weatherCode = weather?.condition.code;
 
     switch (weatherCode) {
       case 1000:
@@ -150,27 +150,27 @@ function Card({ forecastData, whichDay }) {
   return (
     <div className="card-container">
       <div className="card-container__weather-details">
-        <h1>{weatherForecast && `${weatherDataByHour()?.temp_c}°C`}</h1>
+        <h1>{weatherData && `${currentWeather(whichDay)?.temp_c}°C`}</h1>
         <h2>
           <span>
-            <FontAwesomeIcon icon={whatIcon(weatherDataByHour())} />
+            <FontAwesomeIcon icon={whatIcon(currentWeather(whichDay))} />
           </span>
-          {weatherForecast && weatherDataByHour()?.condition.text}
+          {weatherData && currentWeather(whichDay)?.condition?.text}
         </h2>
       </div>
       <div className="card-container__location-details">
-        <h3>{weatherForecast && whatDayOfWeek()}</h3>
+        <h3>{weatherData && whatDayOfWeek()}</h3>
         <h3>
           <span>
             <FontAwesomeIcon icon={faCalendar} />
           </span>
-          {weatherForecast && whatMonthAndDay()}
+          {weatherData && whatMonthAndDay()}
         </h3>
         <h3>
           <span>
             <FontAwesomeIcon icon={faLocationDot} />
           </span>
-          {weatherForecast && `${location?.name}, ${location?.country}`}
+          {weatherData && `${location?.name}, ${location?.country}`}
         </h3>
       </div>
       <div className="card-container__image-background">
@@ -181,20 +181,19 @@ function Card({ forecastData, whichDay }) {
           <FontAwesomeIcon icon={faAngleDown} />
         </button>
       </div>
-      <HourContext.Provider value={whatHour}>
-        <IconContext.Provider value={whatIcon}>
-          <CardDetails
-            animationClass={
-              animateCard
-                ? "card-details-container__animation-start"
-                : "card-details-container__animation-end"
-            }
-            handleClick={handleClick}
-            weatherForecast={weatherForecast}
-            weatherDataByHour={weatherDataByHour}
-          />
-        </IconContext.Provider>
-      </HourContext.Provider>
+      <CardDetails
+        animationClass={
+          animateCard
+            ? "card-details-container__animation-start"
+            : "card-details-container__animation-end"
+        }
+        handleClick={handleClick}
+        weatherData={weatherData}
+        currentWeather={currentWeather}
+        whichDay={whichDay}
+        currentEpochTime={currentEpochTime}
+        whatIcon={whatIcon}
+      />
     </div>
   );
 }

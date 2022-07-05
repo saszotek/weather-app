@@ -1,27 +1,24 @@
-import React, { useContext } from "react";
+import React from "react";
 import "../../styles/carddetailsforecast.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { HourContext, IconContext } from "./Card";
 
-function CardDetailsForecast({ weatherDataByHour, iteration }) {
-  const whatIcon = useContext(IconContext);
-  const whatHour = useContext(HourContext);
-
-  const correctHour = () => {
-    let hours = whatHour() + iteration;
-    if (hours >= 24) {
-      return (hours -= 24);
+function CardDetailsForecast({ arrayData }) {
+  // Data from API comes like this: 2022-07-05 13:37
+  // Extracting only time by splitting
+  const getExactTime = (text) => {
+    if (text === undefined) {
+      return null;
     }
-    return hours;
+
+    const arrDate = text.split(" ");
+    return arrDate[1];
   };
 
   return (
     <div className="card-details-container__carousel__inner-carousel_details">
-      <div>
-        <FontAwesomeIcon icon={whatIcon(weatherDataByHour())} />
-      </div>
-      <p>{correctHour()}:00</p>
-      <p>{weatherDataByHour(iteration)?.temp_c}°C</p>
+      <div>{arrayData && <FontAwesomeIcon icon={arrayData[0]} />}</div>
+      <p>{arrayData && getExactTime(arrayData[1])}</p>
+      <p>{arrayData && `${arrayData[2]}°C`}</p>
     </div>
   );
 }

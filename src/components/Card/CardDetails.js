@@ -11,6 +11,7 @@ import {
   faGauge,
   faWater,
   faXmark,
+  faSkull,
 } from "@fortawesome/free-solid-svg-icons";
 import CardDetailsForecast from "./CardDetailsForecast";
 import { motion } from "framer-motion";
@@ -18,8 +19,11 @@ import { motion } from "framer-motion";
 function CardDetails({
   animationClass,
   handleClick,
-  weatherForecast,
-  weatherDataByHour,
+  weatherData,
+  currentWeather,
+  whichDay,
+  currentEpochTime,
+  whatIcon,
 }) {
   const [width, setWidth] = useState(0);
 
@@ -41,6 +45,64 @@ function CardDetails({
     return `${hours}:${minutes}`;
   };
 
+  // Preparing data (icon, time, temperature) to render forecast for later hours (even going out on the next day)
+  // as a Slider Carousel in the bottom of a Details Card View.
+
+  // Because of a free access to the weather's API,
+  // had to make workarounds to display forecast's data correctly.
+
+  // Maximum days of forecast for free access is 3 days.
+  // Problem occures when component (Card.js) is responsible for displaying a data for a third day
+  // and Slider Carousel in the Details Card View wants to display forecast beyond that day.
+
+  // As a workaround I display a Skull icon and text: Forecast No Data to indiciate the problem and solution.
+  const setForecastWeather = (index) => {
+    if (weatherData === undefined) {
+      return null;
+    }
+
+    let arr = [];
+    let timestamp = currentEpochTime() + 3600 * index;
+    let dayCorrection = whichDay + 1;
+    let condition = null;
+    let thereIsNoDataForecast = false;
+
+    // Assigning a correct unix time based on whether there is data available by API for another day (free access restrictions)
+    if (dayCorrection > 2) {
+      dayCorrection = 2;
+      thereIsNoDataForecast = true;
+      condition = weatherData[dayCorrection]?.hour[23]?.time_epoch;
+    } else {
+      condition = weatherData[dayCorrection]?.hour[0]?.time_epoch;
+    }
+
+    // Comparison of current time exceed to the next day
+    if (timestamp < condition) {
+      // If true then forecast's data is sent normally
+      arr.push(whatIcon(currentWeather(whichDay, timestamp)));
+      arr.push(currentWeather(whichDay, timestamp)?.time);
+      arr.push(currentWeather(whichDay, timestamp)?.temp_c);
+      return arr;
+    } else {
+      // If false then there is another if statement checking whether forecast's data can be accessed for the next day
+      // This condition was created solely on API's restrictions for not having data for fourth day.
+      if (thereIsNoDataForecast) {
+        // Dummy data to display
+        arr.push(faSkull);
+        arr.push("1934-03-12 Forecast");
+        arr.push("No Data");
+        return arr;
+      }
+
+      // If there is no problem with accessing data for the next day
+      // then forecast's data is sent normally
+      arr.push(whatIcon(currentWeather(dayCorrection, timestamp)));
+      arr.push(currentWeather(dayCorrection, timestamp)?.time);
+      arr.push(currentWeather(dayCorrection, timestamp)?.temp_c);
+      return arr;
+    }
+  };
+
   return (
     <div className={`card-details-container ${animationClass} `}>
       <div className="card-details-container__button">
@@ -57,7 +119,7 @@ function CardDetails({
             Sunrise
           </p>
           <p>
-            {weatherForecast && convertTime(weatherForecast?.astro?.sunrise)}
+            {weatherData && convertTime(weatherData[whichDay]?.astro?.sunrise)}
           </p>
         </div>
         <div className="card-details-container__box__info">
@@ -68,7 +130,7 @@ function CardDetails({
             Sunset
           </p>
           <p>
-            {weatherForecast && convertTime(weatherForecast?.astro?.sunset)}
+            {weatherData && convertTime(weatherData[whichDay]?.astro?.sunset)}
           </p>
         </div>
         <div className="card-details-container__box__info">
@@ -79,7 +141,7 @@ function CardDetails({
             Rain
           </p>
           <p>
-            {weatherForecast?.day?.daily_chance_of_rain}
+            {weatherData && weatherData[whichDay]?.day?.daily_chance_of_rain}
             <span>%</span>
           </p>
         </div>
@@ -91,7 +153,7 @@ function CardDetails({
             Snow
           </p>
           <p>
-            {weatherForecast?.day?.daily_chance_of_snow}
+            {weatherData && weatherData[whichDay]?.day?.daily_chance_of_snow}
             <span>%</span>
           </p>
         </div>
@@ -103,7 +165,7 @@ function CardDetails({
             Wind
           </p>
           <p>
-            {weatherForecast?.day?.maxwind_kph}
+            {weatherData && weatherData[whichDay]?.day?.maxwind_kph}
             <span>km/h</span>
           </p>
         </div>
@@ -115,7 +177,7 @@ function CardDetails({
             Air pressure
           </p>
           <p>
-            {weatherDataByHour()?.pressure_mb}
+            {weatherData && currentWeather(whichDay)?.pressure_mb}
             <span>mb</span>
           </p>
         </div>
@@ -127,7 +189,7 @@ function CardDetails({
             Humidity
           </p>
           <p>
-            {weatherForecast?.day?.avghumidity}
+            {weatherData && weatherData[whichDay]?.day?.avghumidity}
             <span>%</span>
           </p>
         </div>
@@ -138,7 +200,7 @@ function CardDetails({
             </i>
             UV
           </p>
-          <p>{weatherForecast?.day?.uv}</p>
+          <p>{weatherData && weatherData[whichDay]?.day?.uv}</p>
         </div>
       </div>
       <motion.div
@@ -152,11 +214,7 @@ function CardDetails({
           className="card-details-container__carousel__inner-carousel"
         >
           {[...Array(12)].map((e, i) => (
-            <CardDetailsForecast
-              key={i}
-              weatherDataByHour={weatherDataByHour}
-              iteration={i + 1}
-            />
+            <CardDetailsForecast key={i} arrayData={setForecastWeather(i)} />
           ))}
         </motion.div>
       </motion.div>
