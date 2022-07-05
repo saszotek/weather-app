@@ -10,6 +10,7 @@ function Dashboard() {
   const [forecastData, setForecastData] = useState([]);
   const [input, setInput] = useState("");
   const [width, setWidth] = useState(0);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   const carousel = useRef();
 
@@ -23,6 +24,7 @@ function Dashboard() {
       .get(`${serverURL}&q=${input}&days=3&aqi=no&alerts=no`)
       .then((response) => {
         setForecastData(response.data);
+        setIsDisplay(true);
       })
       .catch((error) => {
         console.log(error);
@@ -44,9 +46,10 @@ function Dashboard() {
           dragConstraints={{ right: 0, left: -width }}
           className="dashboard-container__carousel__inner-carousel"
         >
-          {[...Array(3)].map((e, i) => (
-            <Card key={i} forecastData={forecastData} whichDay={i} />
-          ))}
+          {isDisplay &&
+            [...Array(3)].map((e, i) => (
+              <Card key={i} forecastData={forecastData} whichDay={i} />
+            ))}
         </motion.div>
       </motion.div>
     </div>
