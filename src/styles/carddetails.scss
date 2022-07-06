@@ -4,8 +4,8 @@
     position: absolute;
     top: -600px;
     left: 0;
-    width: 400px;
-    height: 600px;
+    width: variables.$card-width-big;
+    height: variables.$card-height-big;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -87,4 +87,44 @@
 .card-details-container__animation-end {
     top: -600px;
     transition: 1s ease-in-out;
+}
+
+// Responsive styles
+@media (max-width: 500px) {
+    .card-details-container {
+        width: variables.$card-width-big * 0.75;
+        height: variables.$card-height-big * 0.75;
+        padding-bottom: 20px;
+
+        .card-details-container__button {
+            top: 25px;
+            right: 25px;
+    
+            button {
+                font-size: 45px 0.8;
+            }
+        }
+
+        .card-details-container__box {
+            .card-details-container__box__info {
+                padding: 4px 0;
+
+                p {
+                    font-size: 18px * 0.8;
+        
+                    span {
+                        font-size: 14px * 0.8;
+                    }
+        
+                    i {
+                        margin-right: 7px * 0.8;
+                    }
+                }
+            }
+        }
+
+        .card-details-container__carousel {
+            max-width: 360px * 0.75;
+        }
+    }
 }

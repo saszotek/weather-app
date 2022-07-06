@@ -5,22 +5,22 @@ body {
 }
 
 .dashboard-container {
+    padding-bottom: 50px;
+    
     .header {
         max-width: 1000px;
         margin: 50px auto 150px auto;
     }
 
     .dashboard-container__carousel {
-        max-width: 1400px;
+        max-width: variables.$card-width-big * 3 + 200;
         margin: 0 auto;
         cursor: grab;
         overflow: hidden;
 
         .dashboard-container__carousel__inner-carousel {
             display: flex;
-            gap: 50px;
-            margin: 0 50px;
-            padding-bottom: 50px;
+            margin: 0 25px;
         }
     }
 }

@@ -5,11 +5,12 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    min-width: 400px;
-    min-height: 600px;
+    min-width: variables.$card-width-big;
+    min-height: variables.$card-height-big;
     color: variables.$text-color-light;
     border-radius: 25px;
     overflow: hidden;
+    margin: 0 25px;
 
     .card-container__image-background {
         position: absolute;
@@ -87,6 +88,49 @@
 
             &:hover {
                 cursor: pointer;
+            }
+        }
+    }
+}
+
+// Responsive styles
+@media (max-width: 500px) {
+    .card-container {
+        min-width: variables.$card-width-big * 0.75;
+        min-height: variables.$card-height-big * 0.75;
+    
+        .card-container__weather-details {
+            h1 {
+                font-size: 45px * 0.8;
+            }
+    
+            h2 {
+                font-size: 30px * 0.8;
+            }
+        }
+    
+        .card-container__location-details {
+            h3 {
+                &:nth-child(1) {
+                    font-size: 30px * 0.8;
+                }
+    
+                &:nth-child(2) {
+                    font-size: 16px * 0.8;
+                }
+    
+                &:nth-child(3) {
+                    font-size: 16px * 0.8;
+                }
+            }
+        }
+
+        .card-container__button {
+            top: 25px;
+            right: 25px;
+    
+            button {
+                font-size: 45px * 0.8;
             }
         }
     }

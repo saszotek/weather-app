@@ -45,3 +45,21 @@
         }
     }
 }
+
+// Responsive styles
+@media (max-width: 500px) {
+    .header-container {
+        .header-container__title {
+            h1 {
+                font-size: 30px;
+                text-align: center;
+            }
+        }
+
+        .header-container__search-box {
+            input {
+                width: 250px;
+            }
+        }
+    }
+}
