@@ -10,7 +10,6 @@
     color: variables.$text-color-light;
     border-radius: 25px;
     overflow: hidden;
-    margin: 0 25px;
 
     .card-container__image-background {
         position: absolute;
@@ -96,8 +95,8 @@
 // Responsive styles
 @media (max-width: 500px) {
     .card-container {
-        min-width: variables.$card-width-big * 0.75;
-        min-height: variables.$card-height-big * 0.75;
+        min-width: variables.$card-width-small;
+        min-height: variables.$card-height-small;
     
         .card-container__weather-details {
             h1 {
@@ -131,6 +130,48 @@
     
             button {
                 font-size: 45px * 0.8;
+            }
+        }
+    }
+}
+
+@media (max-width: 320px) {
+    .card-container {
+        min-width: variables.$card-width-ultra-small;
+        min-height: variables.$card-height-ultra-small;
+    
+        .card-container__weather-details {
+            h1 {
+                font-size: 45px * 0.6;
+            }
+    
+            h2 {
+                font-size: 30px * 0.6;
+            }
+        }
+    
+        .card-container__location-details {
+            h3 {
+                &:nth-child(1) {
+                    font-size: 30px * 0.6;
+                }
+    
+                &:nth-child(2) {
+                    font-size: 16px * 0.6;
+                }
+    
+                &:nth-child(3) {
+                    font-size: 16px * 0.6;
+                }
+            }
+        }
+
+        .card-container__button {
+            top: 25px;
+            right: 25px;
+    
+            button {
+                font-size: 45px * 0.6;
             }
         }
     }

@@ -1,3 +1,4 @@
+// Global variables
 $font-primary: 'Montserrat', sans-serif;
 $color-primary: #343D4B;
 $color-secondary: #222831;
@@ -5,5 +6,12 @@ $text-color-light: #ffffff;
 $letter-spacing-primary: 3px;
 $letter-spacing-secondary: 1.5px;
 $letter-spacing-third: 1px;
+
+// Card variables
 $card-width-big: 400px;
+$card-width-small: $card-width-big * 0.75;
+$card-width-ultra-small: $card-width-big * 0.6;
 $card-height-big: 600px;
+$card-height-small: $card-height-big * 0.75;
+$card-height-ultra-small: $card-height-big * 0.6;
+$card-margin-carousel: 50px;

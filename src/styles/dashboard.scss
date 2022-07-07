@@ -20,7 +20,13 @@ body {
 
         .dashboard-container__carousel__inner-carousel {
             display: flex;
-            margin: 0 25px;
+
+            .card-container {
+                &:nth-child(1),
+                &:nth-child(3) {
+                    margin: 0 variables.$card-margin-carousel;
+                }
+            }
         }
     }
 }
@@ -29,15 +35,49 @@ body {
 @media (max-width: 1400px) {
     .dashboard-container {
         .dashboard-container__carousel {
-            max-width: 950px;
+            // (card's width * number of cards seen) + (complete size of horizontal margins)
+            max-width: variables.$card-width-big * 2 + variables.$card-margin-carousel * 3;
         }
     }
 }
 
-@media (max-width: 949px) {
+@media (max-width: 950px) {
     .dashboard-container {
         .dashboard-container__carousel {
-            max-width: 500px;
+            max-width: variables.$card-width-big + variables.$card-margin-carousel * 2;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .dashboard-container {
+        .dashboard-container__carousel {
+            max-width: variables.$card-width-small + variables.$card-margin-carousel * 2;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .dashboard-container {
+        .dashboard-container__carousel {
+            max-width: variables.$card-width-small + (variables.$card-margin-carousel * 0.25) * 2;
+
+            .dashboard-container__carousel__inner-carousel {
+                .card-container {
+                    &:nth-child(1),
+                    &:nth-child(3) {
+                        margin: 0 (variables.$card-margin-carousel * 0.25);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 320px) {
+    .dashboard-container {
+        .dashboard-container__carousel {
+            max-width: variables.$card-width-ultra-small + (variables.$card-margin-carousel * 0.25) * 2;
         }
     }
 }
