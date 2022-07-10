@@ -1,0 +1,30 @@
+@use 'variables';
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 10vh;
+
+    span {
+        color: #ffffff;
+        font-size: 40px;
+        animation: 2s linear infinite spinner;
+    }
+}
+
+//   Responsive styles
+@media (max-height: 720px) {
+    .loader-container {
+        height: 5vh;
+    }
+}
+
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

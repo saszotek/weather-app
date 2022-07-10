@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "../../styles/header.scss";
 
-function Header({ setInput, getForecastData }) {
+function Header({ setInput, getForecastData, setIsDisplay, setIsLoading }) {
   const inputReference = useRef(null);
 
   useEffect(() => {
@@ -10,7 +10,9 @@ function Header({ setInput, getForecastData }) {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
+      setIsDisplay(true);
       getForecastData();
+      setIsLoading(false);
     }
   };
 
