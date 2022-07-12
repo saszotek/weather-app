@@ -1,0 +1,19 @@
+@use 'variables';
+
+.error-message-container {
+    position: absolute;
+    bottom: -30vh;
+    right: 0;
+    width: 100%;
+    text-align: center;
+
+    .error-message-container__info-box {
+        display: inline-block;
+        padding: 30px 40px;
+        color: #f0f0f0;
+        font-size: 16px;
+        background-color: #d38686a9;
+        border-radius: 25px;
+
+    }
+}
