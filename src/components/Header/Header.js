@@ -1,12 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { serverURL } from "../../api/main";
 import "../../styles/header.scss";
 
-function Header({ setInput, getForecastData, setIsDisplay, setIsLoading }) {
+function Header({ setForecastData, setIsDisplay, setIsLoading }) {
+  const [input, setInput] = useState("");
   const inputReference = useRef(null);
 
   useEffect(() => {
     inputReference.current.focus();
   }, []);
+
+  // Requesting weather's data
+  const getForecastData = async () => {
+    await axios
+      .get(`${serverURL}&q=${input}&days=3&aqi=no&alerts=no`)
+      .then((response) => {
+        setIsLoading(true);
+        setForecastData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
-import { serverURL } from "../../api/main";
 import { motion } from "framer-motion";
 import "../../styles/dashboard.scss";
 import Header from "../Header/Header";
@@ -9,7 +7,6 @@ import Loader from "../Loader/Loader";
 
 function Dashboard() {
   const [forecastData, setForecastData] = useState([]);
-  const [input, setInput] = useState("");
   const [width, setWidth] = useState(0);
   const [isDisplay, setIsDisplay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,25 +19,11 @@ function Dashboard() {
     }
   }, [isLoading]);
 
-  // Requesting weather's data
-  const getForecastData = async () => {
-    await axios
-      .get(`${serverURL}&q=${input}&days=3&aqi=no&alerts=no`)
-      .then((response) => {
-        setIsLoading(true);
-        setForecastData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <div className="dashboard-container">
       <div className="header">
         <Header
-          setInput={setInput}
-          getForecastData={getForecastData}
+          setForecastData={setForecastData}
           setIsDisplay={setIsDisplay}
           setIsLoading={setIsLoading}
         />
