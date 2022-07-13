@@ -10,14 +10,19 @@ function Dashboard() {
   const [width, setWidth] = useState(0);
   const [isDisplay, setIsDisplay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [marginCarousel, setMarginCarousel] = useState(50);
 
   const carousel = useRef();
+  let windowWidth = window.innerWidth;
 
   useEffect(() => {
     if (isLoading) {
       setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+      if (windowWidth <= 400) {
+        setMarginCarousel(50 * 0.25);
+      }
     }
-  }, [isLoading]);
+  }, [isLoading, windowWidth]);
 
   return (
     <div className="dashboard-container">
@@ -37,7 +42,7 @@ function Dashboard() {
           >
             <motion.div
               drag="x"
-              dragConstraints={{ right: 0, left: -width }}
+              dragConstraints={{ right: 0, left: -width - marginCarousel }}
               className="dashboard-container__carousel__inner-carousel"
             >
               {[...Array(3)].map((e, i) => (

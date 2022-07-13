@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../styles/card.scss";
 import icons from "../../assets/icons/icons";
-import RainBG from "../../assets/images/rain-bg.jpg";
+import images from "../../assets/images/images";
 import CardDetails from "./CardDetails";
 
 function Card({ forecastData, whichDay }) {
@@ -70,27 +70,42 @@ function Card({ forecastData, whichDay }) {
     return `${month} ${day}${suffix}`;
   };
 
-  // Assigning a proper icon based on API's weather code
-  // Not ideal solution, but it is what it is for now
-  const whatIcon = (weather) => {
+  // Assigning a proper icon and image background based on API's weather code
+  // Not ideal solution I guess, but it is what it is for now
+  const whatBackgroundAndIcon = (weather) => {
     let weatherCode = weather?.condition.code;
 
     switch (weatherCode) {
       case 1000:
-        return icons.faSun;
+        return {
+          image: images.SunnyBG,
+          icon: icons.faSun,
+        };
       case 1003:
-        return icons.faCloudSun;
+        return {
+          image: images.SunnyBG,
+          icon: icons.faCloudSun,
+        };
       case 1006:
       case 1009:
-        return icons.faCloud;
+        return {
+          image: images.CloudyBG,
+          icon: icons.faCloud,
+        };
       case 1087:
       case 1273:
       case 1276:
-        return icons.faCloudBolt;
+        return {
+          image: images.ThunderBG,
+          icon: icons.faCloudBolt,
+        };
       case 1030:
       case 1135:
       case 1147:
-        return icons.faSmog;
+        return {
+          image: images.MistBG,
+          icon: icons.faSmog,
+        };
       case 1063:
       case 1150:
       case 1153:
@@ -106,7 +121,10 @@ function Card({ forecastData, whichDay }) {
       case 1240:
       case 1243:
       case 1246:
-        return icons.faCloudRain;
+        return {
+          image: images.RainBG,
+          icon: icons.faCloudRain,
+        };
       case 1066:
       case 1069:
       case 1072:
@@ -129,9 +147,15 @@ function Card({ forecastData, whichDay }) {
       case 1264:
       case 1279:
       case 1282:
-        return icons.faSnowflake;
+        return {
+          image: images.SnowBG,
+          icon: icons.faSnowflake,
+        };
       default:
-        return icons.faSkull;
+        return {
+          image: images.GundamBG,
+          icon: icons.faSkull,
+        };
     }
   };
 
@@ -141,7 +165,9 @@ function Card({ forecastData, whichDay }) {
         <h1>{weatherData && `${currentWeather(whichDay)?.temp_c}°C`}</h1>
         <h2>
           <span>
-            <FontAwesomeIcon icon={whatIcon(currentWeather(whichDay))} />
+            <FontAwesomeIcon
+              icon={whatBackgroundAndIcon(currentWeather(whichDay)).icon}
+            />
           </span>
           {weatherData && currentWeather(whichDay)?.condition?.text}
         </h2>
@@ -162,7 +188,10 @@ function Card({ forecastData, whichDay }) {
         </h3>
       </div>
       <div className="card-container__image-background">
-        <img src={RainBG} alt="Rain" />
+        <img
+          src={whatBackgroundAndIcon(currentWeather(whichDay)).image}
+          alt="Current weather"
+        />
       </div>
       <div className="card-container__button">
         <button onClick={() => handleClick()}>
@@ -180,7 +209,7 @@ function Card({ forecastData, whichDay }) {
         currentWeather={currentWeather}
         whichDay={whichDay}
         currentEpochTime={currentEpochTime}
-        whatIcon={whatIcon}
+        whatBackgroundAndIcon={whatBackgroundAndIcon}
       />
     </div>
   );

@@ -12,7 +12,7 @@ function CardDetails({
   currentWeather,
   whichDay,
   currentEpochTime,
-  whatIcon,
+  whatBackgroundAndIcon,
 }) {
   const [width, setWidth] = useState(0);
 
@@ -68,7 +68,7 @@ function CardDetails({
     // Comparison of current time exceed to the next day
     if (timestamp < condition) {
       // If true then forecast's data is sent normally
-      arr.push(whatIcon(currentWeather(whichDay, timestamp)));
+      arr.push(whatBackgroundAndIcon(currentWeather(whichDay, timestamp)).icon);
       arr.push(currentWeather(whichDay, timestamp)?.time);
       arr.push(currentWeather(whichDay, timestamp)?.temp_c);
       return arr;
@@ -85,7 +85,9 @@ function CardDetails({
 
       // If there is no problem with accessing data for the next day
       // then forecast's data is sent normally
-      arr.push(whatIcon(currentWeather(dayCorrection, timestamp)));
+      arr.push(
+        whatBackgroundAndIcon(currentWeather(dayCorrection, timestamp)).icon
+      );
       arr.push(currentWeather(dayCorrection, timestamp)?.time);
       arr.push(currentWeather(dayCorrection, timestamp)?.temp_c);
       return arr;
