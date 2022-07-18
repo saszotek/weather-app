@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # Weather API key restriction
-/src/api/key.js
+# /src/api/key.js
