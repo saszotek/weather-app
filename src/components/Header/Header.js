@@ -19,6 +19,7 @@ function Header({ setForecastData, setIsDisplay, setIsLoading }) {
     await axios
       .get(`${serverURL}&q=${input}&days=3&aqi=no&alerts=no`)
       .then((response) => {
+        setMessage("");
         setIsLoading(true);
         setForecastData(response.data);
       })

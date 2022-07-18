@@ -83,7 +83,7 @@ function Card({ forecastData, whichDay }) {
         };
       case 1003:
         return {
-          image: images.SunnyBG,
+          image: images.PartlyCloudyBG,
           icon: icons.faCloudSun,
         };
       case 1006:
