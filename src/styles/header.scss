@@ -14,7 +14,7 @@
 
     .header-container__title {
         h1 {
-            padding: 100px 0 30px 0;
+            padding: 40px 0 0 0;
             color: variables.$text-color-light;
             font-size: 40px;
             letter-spacing: variables.$letter-spacing-primary;
@@ -28,7 +28,7 @@
     }
 
     .header-container__search-box {
-        padding: 30px 0 100px 0;
+        padding: 30px 0 40px 0;
 
         input {
             width: 300px;

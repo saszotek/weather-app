@@ -8,8 +8,8 @@ body {
     padding-bottom: 50px;
     
     .header {
-        max-width: 1000px;
-        margin: 50px auto 150px auto;
+        max-width: 800px;
+        margin: 50px auto 80px auto;
     }
 
     .dashboard-container__carousel {
@@ -79,5 +79,14 @@ body {
         .dashboard-container__carousel {
             max-width: variables.$card-width-ultra-small + (variables.$card-margin-carousel * 0.25) * 2;
         }
+    }
+}
+
+@media (max-height: 740px) {
+    .dashboard-container {
+        .header {
+            margin: 50px auto 20px auto;
+        }
+
     }
 }
