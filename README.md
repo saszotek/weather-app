@@ -1,6 +1,6 @@
 # Rainbow Forecast
 
-Rainbow Forecast is a weather's forecast app. Enter location in English to get detailed forecast for the next 3 days.
+Rainbow Forecast is a weather's forecast app using [weatherapi.com](https://www.weatherapi.com/). Get detailed forecast for the next 3 days by entering location name in English.
 
 ## Live version
 
@@ -11,3 +11,4 @@ Rainbow Forecast is a weather's forecast app. Enter location in English to get d
 - React
 - Framer Motion
 - SCSS
+- [weatherapi.com](https://www.weatherapi.com/) - API provider with weather forecast data
