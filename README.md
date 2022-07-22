@@ -9,6 +9,7 @@ Rainbow Forecast is a weather forecast app using [weatherapi.com](https://www.we
 ## Technologies
 
 - React
+- Axios
 - Framer Motion
 - SCSS
 - [weatherapi.com](https://www.weatherapi.com/) - API provider with weather forecast data
