@@ -16,6 +16,8 @@ import {
   faGauge,
   faWater,
   faXmark,
+  faStar,
+  faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 const icons = {
@@ -36,6 +38,8 @@ const icons = {
   faGauge: faGauge,
   faWater: faWater,
   faXmark: faXmark,
+  faStar: faStar,
+  faCaretDown: faCaretDown,
 };
 
 export default icons;

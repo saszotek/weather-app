@@ -12,6 +12,39 @@
     background-color: variables.$color-secondary;
     border-radius: 25px;
 
+    .header-container__favorite-list{
+        position: absolute;
+        bottom: 7px;
+        left: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            font-size: 30px;
+            color: #fff;
+            border: none;
+            background-color: variables.$color-secondary;
+
+            
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .header-container__favorite-list__animation {
+            background-color: red;
+            transform: rotate(180deg);
+        }
+    }
+
     .header-container__title {
         h1 {
             padding: 40px 0 0 0;
@@ -28,6 +61,7 @@
     }
 
     .header-container__search-box {
+        display: flex;
         padding: 30px 0 40px 0;
 
         input {
@@ -36,11 +70,31 @@
             padding: 10px 15px;
             font-size: 18px;
             letter-spacing: variables.$letter-spacing-third;
-            border: 1px solid variables.$color-secondary;
-            border-radius: 25px;
+            border-top: 1px solid variables.$color-secondary;
+            border-right: 0 solid variables.$color-secondary;
+            border-bottom: 1px solid variables.$color-secondary;
+            border-left: 1px solid variables.$color-secondary;
+            border-radius: 25px 0 0 25px;
 
             &:focus {
                 outline: none;
+            }
+        }
+
+        button {
+            width: 50px;
+            height: 40px;
+            color: #fff;
+            font-size: 16px;
+            border-top: 1px solid variables.$color-secondary;
+            border-right: 1px solid variables.$color-secondary;
+            border-bottom: 1px solid variables.$color-secondary;
+            border-left: 0;
+            background-color: variables.$color-primary;
+            border-radius: 0 25px 25px 0;
+
+            &:hover {
+                cursor: pointer;
             }
         }
     }

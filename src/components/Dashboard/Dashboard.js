@@ -28,7 +28,9 @@ function Dashboard() {
     <div className="dashboard-container">
       <div className="header">
         <Header
+          forecastData={forecastData}
           setForecastData={setForecastData}
+          isDisplay={isDisplay}
           setIsDisplay={setIsDisplay}
           setIsLoading={setIsLoading}
         />

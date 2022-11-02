@@ -3,10 +3,21 @@ import axios from "axios";
 import { serverURL } from "../../api/main";
 import "../../styles/header.scss";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import icons from "../../assets/icons/icons";
+import { useLocalState } from "../../util/useLocalState";
 
-function Header({ setForecastData, setIsDisplay, setIsLoading }) {
+function Header({
+  forecastData,
+  setForecastData,
+  isDisplay,
+  setIsDisplay,
+  setIsLoading,
+}) {
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("");
+
+  const [locations, setLocations] = useLocalState("[]", "locations");
 
   const inputReference = useRef(null);
 
@@ -38,6 +49,21 @@ function Header({ setForecastData, setIsDisplay, setIsLoading }) {
     }
   };
 
+  const handleFavorite = () => {
+    if (isDisplay && forecastData) {
+      let array = JSON.parse(locations);
+      let locationName = `${forecastData.location.name}, ${forecastData.location.country}`;
+      array.push(locationName);
+      setLocations(JSON.stringify(array));
+    } else {
+      validationInput(2137);
+    }
+  };
+
+  const handleFavoriteList = () => {
+    console.log("lista");
+  };
+
   const validationInput = (errorCode) => {
     switch (errorCode) {
       case 1002:
@@ -61,6 +87,11 @@ function Header({ setForecastData, setIsDisplay, setIsLoading }) {
       case 2008:
         setMessage("Authorization to the server has been revoked.");
         break;
+      case 2137:
+        setMessage(
+          "Before adding a location to bookmark, enter its proper name first!"
+        );
+        break;
       case 9999:
         setMessage("Access to the forecast's data is unavailable for now.");
         break;
@@ -72,6 +103,11 @@ function Header({ setForecastData, setIsDisplay, setIsLoading }) {
   return (
     <div className="header-container">
       {message && <ErrorMessage message={message} />}
+      <div className="header-container__favorite-list">
+        <button onClick={handleFavoriteList}>
+          <FontAwesomeIcon icon={icons.faCaretDown} />
+        </button>
+      </div>
       <div className="header-container__title">
         <h1>
           Weather <span>Forecast</span>
@@ -87,6 +123,9 @@ function Header({ setForecastData, setIsDisplay, setIsLoading }) {
           }}
           onKeyDown={handleKeyDown}
         />
+        <button onClick={handleFavorite}>
+          <FontAwesomeIcon icon={icons.faStar} />
+        </button>
       </div>
     </div>
   );
