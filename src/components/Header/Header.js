@@ -6,6 +6,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import icons from "../../assets/icons/icons";
 import { useLocalState } from "../../util/useLocalState";
+import DropdownMenu from "../DropdownMenu/DropdownMenu";
 
 function Header({
   forecastData,
@@ -16,6 +17,8 @@ function Header({
 }) {
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [updatedLocations, setUpdatedLocations] = useState([]);
 
   const [locations, setLocations] = useLocalState("[]", "locations");
 
@@ -24,6 +27,18 @@ function Header({
   useEffect(() => {
     inputReference.current.focus();
   }, []);
+
+  useEffect(() => {
+    let handler = () => {
+      setIsOpen(false);
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   // Requesting weather's data
   const getForecastData = async () => {
@@ -49,6 +64,13 @@ function Header({
     }
   };
 
+  const handleDropdownInput = (locationFromDropdown) => {
+    setInput(locationFromDropdown);
+    // setIsDisplay(true);
+    // getForecastData();
+    // setIsLoading(false);
+  };
+
   const handleFavorite = () => {
     if (isDisplay && forecastData) {
       let array = JSON.parse(locations);
@@ -61,7 +83,8 @@ function Header({
   };
 
   const handleFavoriteList = () => {
-    console.log("lista");
+    setUpdatedLocations(JSON.parse(locations));
+    setIsOpen(!isOpen);
   };
 
   const validationInput = (errorCode) => {
@@ -107,6 +130,11 @@ function Header({
         <button onClick={handleFavoriteList}>
           <FontAwesomeIcon icon={icons.faCaretDown} />
         </button>
+        <DropdownMenu
+          isOpen={isOpen}
+          updatedLocations={updatedLocations}
+          handleDropdownInput={handleDropdownInput}
+        />
       </div>
       <div className="header-container__title">
         <h1>
@@ -118,6 +146,7 @@ function Header({
           type="text"
           placeholder="Search for a location"
           ref={inputReference}
+          value={input}
           onChange={(event) => {
             setInput(event.target.value);
           }}
