@@ -19,6 +19,7 @@ function Header({
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [updatedLocations, setUpdatedLocations] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const [locations, setLocations] = useLocalState("[]", "locations");
 
@@ -52,6 +53,10 @@ function Header({
         setMessage("");
         setIsLoading(true);
         setForecastData(response.data);
+        setFavoriteIconColor(
+          response.data.location.name,
+          response.data.location.country
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -82,19 +87,39 @@ function Header({
   };
 
   const handleFavorite = () => {
-    if (isDisplay && forecastData) {
-      let array = JSON.parse(locations);
-      let locationName = `${forecastData.location.name}, ${forecastData.location.country}`;
-      array.push(locationName);
-      setLocations(JSON.stringify(array));
+    let array = JSON.parse(locations);
+    let locationName = `${forecastData.location.name}, ${forecastData.location.country}`;
+    if (!isFavorite) {
+      if (isDisplay && forecastData) {
+        array.push(locationName);
+        setLocations(JSON.stringify(array));
+        setIsFavorite(true);
+      } else {
+        validationInput(2137);
+      }
     } else {
-      validationInput(2137);
+      array.forEach((element, index) => {
+        if (element === locationName) {
+          array.splice(index, 1);
+          setLocations(JSON.stringify(array));
+          setIsFavorite(false);
+        }
+      });
     }
   };
 
   const handleFavoriteList = () => {
     setUpdatedLocations(JSON.parse(locations));
     setIsOpen(!isOpen);
+  };
+
+  const setFavoriteIconColor = (name, country) => {
+    let array = JSON.parse(locations);
+    array.forEach((element) => {
+      if (element === `${name}, ${country}`) {
+        setIsFavorite(true);
+      }
+    });
   };
 
   const validationInput = (errorCode) => {
@@ -163,7 +188,14 @@ function Header({
           }}
           onKeyDown={handleKeyDown}
         />
-        <button onClick={handleFavorite}>
+        <button
+          className={
+            isFavorite
+              ? "header-container__search-box__favorite-yes"
+              : "header-container__search-box__favorite-not"
+          }
+          onClick={handleFavorite}
+        >
           <FontAwesomeIcon icon={icons.faStar} />
         </button>
       </div>

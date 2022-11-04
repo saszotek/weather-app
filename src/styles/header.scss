@@ -84,7 +84,6 @@
         button {
             width: 50px;
             height: 40px;
-            color: #fff;
             font-size: 16px;
             border-top: 1px solid variables.$color-secondary;
             border-right: 1px solid variables.$color-secondary;
@@ -96,6 +95,14 @@
             &:hover {
                 cursor: pointer;
             }
+        }
+
+        .header-container__search-box__favorite-yes {
+            color: yellow;
+        }
+
+        .header-container__search-box__favorite-not {
+            color: #fff;
         }
     }
 }
