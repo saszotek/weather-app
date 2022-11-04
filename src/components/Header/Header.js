@@ -77,6 +77,7 @@ function Header({
     setIsDisplay(true);
     getForecastData(locationFromDropdown);
     setIsLoading(false);
+    setInput(locationFromDropdown);
   };
 
   const handleDropdownDelete = (index) => {
