@@ -36,12 +36,31 @@
         }
 
         li {
-            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // padding: 10px 20px;
+            padding: 5px;
             border-top: 1px solid rgba(0, 0, 0, 0.5);
 
-            &:hover {
-                cursor: pointer;
-                color: #c96f6f;
+            div:first-child {
+                padding: 5px 20px 5px 20px;
+
+                &:hover {
+                    cursor: pointer;
+                    color: #c96f6f;
+                }
+            }
+
+            div:last-child {
+                padding: 10px;
+                font-size: 14px;
+
+                &:hover {
+                    cursor: pointer;
+                    color: #cf0000;
+                    font-weight: bold;
+                }
             }
         }
     }

@@ -41,9 +41,13 @@ function Header({
   });
 
   // Requesting weather's data
-  const getForecastData = async () => {
+  const getForecastData = async (locationName) => {
+    if (!locationName) {
+      locationName = input;
+    }
+
     await axios
-      .get(`${serverURL}&q=${input}&days=3&aqi=no&alerts=no`)
+      .get(`${serverURL}&q=${locationName}&days=3&aqi=no&alerts=no`)
       .then((response) => {
         setMessage("");
         setIsLoading(true);
@@ -65,10 +69,16 @@ function Header({
   };
 
   const handleDropdownInput = (locationFromDropdown) => {
-    setInput(locationFromDropdown);
-    // setIsDisplay(true);
-    // getForecastData();
-    // setIsLoading(false);
+    setIsDisplay(true);
+    getForecastData(locationFromDropdown);
+    setIsLoading(false);
+  };
+
+  const handleDropdownDelete = (index) => {
+    let array = updatedLocations;
+    array.splice(index, 1);
+    setUpdatedLocations(array);
+    setLocations(JSON.stringify(array));
   };
 
   const handleFavorite = () => {
@@ -134,6 +144,7 @@ function Header({
           isOpen={isOpen}
           updatedLocations={updatedLocations}
           handleDropdownInput={handleDropdownInput}
+          handleDropdownDelete={handleDropdownDelete}
         />
       </div>
       <div className="header-container__title">
