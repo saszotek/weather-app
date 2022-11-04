@@ -70,6 +70,7 @@ function Header({
       setIsDisplay(true);
       getForecastData();
       setIsLoading(false);
+      setIsFavorite(false);
     }
   };
 
