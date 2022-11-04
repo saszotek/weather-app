@@ -6,7 +6,7 @@
     left: -12px;
     width: 250px;
     color: #292929;
-    background: #fff;
+    background-color: #fff;
     border-radius: 25px;
     letter-spacing: variables.$letter-spacing-third;
     z-index: 1;
@@ -63,6 +63,16 @@
                 }
             }
         }
+    }
+
+    .dropdown-menu__empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        color: #5c5c5c;
+        background-color: #fff;
+        border-radius: 25px;
     }
 }
 
