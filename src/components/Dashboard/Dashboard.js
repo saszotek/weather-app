@@ -4,6 +4,7 @@ import "../../styles/dashboard.scss";
 import Header from "../Header/Header";
 import Card from "../Card/Card";
 import Loader from "../Loader/Loader";
+import Maps from "../Maps/Maps";
 
 function Dashboard() {
   const [forecastData, setForecastData] = useState([]);
@@ -55,6 +56,18 @@ function Dashboard() {
         ) : (
           <Loader />
         ))}
+      <div className="maps">
+        {isDisplay && isLoading ? (
+          <Maps
+            latitude={forecastData.location.lat}
+            longitude={forecastData.location.lon}
+            name={forecastData.location.name}
+            country={forecastData.location.country}
+          />
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }
