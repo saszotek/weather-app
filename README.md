@@ -1,6 +1,6 @@
 # Rainbow Forecast
 
-Rainbow Forecast is a weather forecast app using [weatherapi.com](https://www.weatherapi.com/). Get detailed forecast for the next 3 days by entering location name in English. Save favorite places to the list and access them later with local storage.
+Rainbow Forecast is a weather forecast app using [weatherapi.com](https://www.weatherapi.com/). Get detailed forecast for the next 3 days by entering location name in english. Save favorite places to the list and access them later with local storage.
 
 ## Live version
 
@@ -8,7 +8,7 @@ Rainbow Forecast is a weather forecast app using [weatherapi.com](https://www.we
 
 ## Technologies
 
-- React
+- React.js
 - Axios
 - Framer Motion
 - SCSS
